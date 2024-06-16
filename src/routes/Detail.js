@@ -29,7 +29,7 @@ function Detail() {
           <h1>Loading...</h1>
         ) : (
           <div className={style.inner_wrapper}>
-            <img src={movieData.large_cover_image} alt={movieData.title} />
+            <img src={movieData.medium_cover_image} alt={movieData.title} />
             <div className={style.content}>
               <div className={style.title}>{movieData.title_long}</div>
               <div className={style.rating}>
