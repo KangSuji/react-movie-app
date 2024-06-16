@@ -1,32 +1,34 @@
 import { useEffect, useState } from "react";
 import Movie from "../components/Movie";
+import styles from "./Home.module.css";
 
 function Home() {
   const [loading, setLoding] = useState(true);
-  const [movies, setMoves] = useState([]);
+  const [movies, setMovies] = useState([]);
   const getMovies = async () => {
     const json = await (
       await fetch(
         "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year"
       )
     ).json();
-    setMoves(json.data.movies);
+    setMovies(json.data.movies);
     setLoding(false);
   };
   useEffect(() => {
     getMovies();
   }, []);
   return (
-    <div>
+    <div className={styles.container}>
       {loading ? (
-        <h1>Loding...</h1>
+        <h1>Loading...</h1>
       ) : (
-        <div>
+        <div className={styles.movies}>
           {movies.map((movie) => {
             return (
               <Movie
                 key={movie.id}
                 id={movie.id}
+                year={movie.year}
                 movieTitle={movie.title}
                 coverImage={movie.medium_cover_image}
                 summary={movie.summary}
